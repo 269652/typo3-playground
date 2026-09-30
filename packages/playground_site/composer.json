@@ -1,0 +1,12 @@
+{
+    "name": "playground/site-package",
+    "description": "Playground site package: site set, backend layouts, page TSconfig",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "typo3/cms-core": "^14.3",
+        "typo3/cms-fluid-styled-content": "^14.3"
+    },
+    "autoload": { "psr-4": { "Playground\\Site\\": "Classes/" } },
+    "extra": { "typo3/cms": { "extension-key": "playground_site" } }
+}

@@ -1,0 +1,7 @@
+vendor/
+public/
+var/
+config/system/settings.php
+config/system/additional.php
+.phpunit.cache/
+composer.lock.bak
