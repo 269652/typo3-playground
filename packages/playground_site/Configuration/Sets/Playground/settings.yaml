@@ -1,0 +1,4 @@
+playground:
+  site:
+    name: 'TYPO3 Playground'
+    accentColor: '#ff8700'

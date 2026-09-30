@@ -1,0 +1,21 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <sheetTitle>LLL:EXT:playground_demo/Resources/Private/Language/locallang_db.xlf:flexform.sheet.general</sheetTitle>
+                <type>array</type>
+                <el>
+                    <settings.name>
+                        <label>LLL:EXT:playground_demo/Resources/Private/Language/locallang_db.xlf:flexform.name</label>
+                        <config>
+                            <type>input</type>
+                            <size>30</size>
+                            <eval>trim</eval>
+                            <default>World</default>
+                        </config>
+                    </settings.name>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

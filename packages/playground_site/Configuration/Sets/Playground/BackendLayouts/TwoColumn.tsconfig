@@ -1,0 +1,22 @@
+mod.web_layout.BackendLayouts.PlaygroundTwoColumn {
+    title = Playground: Two columns (main + sidebar)
+    config.backend_layout {
+        colCount = 3
+        rowCount = 1
+        rows {
+            1.columns {
+                1 {
+                    name = Main
+                    colPos = 0
+                    identifier = main
+                    colspan = 2
+                }
+                2 {
+                    name = Sidebar
+                    colPos = 1
+                    identifier = sidebar
+                }
+            }
+        }
+    }
+}

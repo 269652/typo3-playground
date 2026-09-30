@@ -44,7 +44,7 @@ final class BackendLayoutTest extends TestCase
         self::assertFileExists($path);
         $ts = (string)file_get_contents($path);
 
-        self::assertMatchesRegularExpression('/mod\.web_layout\.BackendLayouts\.playground_[a-z_]+\s*\{/', $ts);
+        self::assertMatchesRegularExpression('/mod\.web_layout\.BackendLayouts\.Playground[A-Za-z]+\s*\{/', $ts);
         self::assertMatchesRegularExpression('/title\s*=\s*\S+/', $ts);
 
         preg_match_all('/colPos\s*=\s*(\d+)/', $ts, $m);
@@ -60,7 +60,7 @@ final class BackendLayoutTest extends TestCase
     {
         $ids = [];
         foreach (glob(self::SET . '/BackendLayouts/*.tsconfig') ?: [] as $file) {
-            preg_match('/BackendLayouts\.(playground_[a-z_]+)\s*\{/', (string)file_get_contents($file), $m);
+            preg_match('/BackendLayouts\.(Playground[A-Za-z]+)\s*\{/', (string)file_get_contents($file), $m);
             self::assertNotEmpty($m, basename($file) . ' declares an identifier');
             $ids[] = $m[1];
         }
@@ -69,26 +69,69 @@ final class BackendLayoutTest extends TestCase
         self::assertSame($ids, array_values(array_unique($ids)));
     }
 
+    /** @return array<string, array{string, string, list<string>}> */
+    public static function columnIdentifiers(): array
+    {
+        return [
+            'default' => ['Default', 'PlaygroundDefault', ['main']],
+            'two column' => ['TwoColumn', 'PlaygroundTwoColumn', ['main', 'sidebar']],
+            'landing' => ['Landing', 'PlaygroundLanding', ['hero', 'main', 'footer']],
+        ];
+    }
+
+    /** @param list<string> $identifiers */
     #[Test]
-    public function typoScriptRendersEveryColumnOfEveryLayout(): void
+    #[DataProvider('columnIdentifiers')]
+    public function everyColumnHasIdentifierRenderedByItsTemplate(string $file, string $layout, array $identifiers): void
+    {
+        $ts = (string)file_get_contents(self::SET . '/BackendLayouts/' . $file . '.tsconfig');
+        $template = (string)file_get_contents(
+            __DIR__ . '/../../../packages/playground_site/Resources/Private/PageView/Pages/' . $layout . '.fluid.html'
+        );
+
+        preg_match_all('/identifier\s*=\s*(\w+)/', $ts, $m);
+        $declared = $m[1];
+        sort($declared);
+        $expected = $identifiers;
+        sort($expected);
+        self::assertSame($expected, $declared, 'column identifiers in backend layout');
+
+        foreach ($identifiers as $identifier) {
+            self::assertStringContainsString('{content.' . $identifier . '}', $template, "template renders area $identifier");
+        }
+    }
+
+    #[Test]
+    public function typoScriptUsesPageviewWithSinglePageContentProcessor(): void
     {
         $setup = (string)file_get_contents(self::SET . '/setup.typoscript');
 
-        foreach ([0, 1, 10, 20] as $colPos) {
-            self::assertMatchesRegularExpression('/colPos\s*=\s*' . $colPos . '\b/', $setup, "colPos $colPos rendered");
-        }
-        foreach (['playground_default', 'playground_two_col', 'playground_landing'] as $id) {
-            self::assertStringContainsString($id, $setup, "template selection covers $id");
-        }
+        self::assertStringContainsString('PAGEVIEW', $setup);
+        self::assertSame(1, preg_match_all('/=\s*page-content\b/', $setup), 'exactly one page-content processor');
+        self::assertMatchesRegularExpression('/as\s*=\s*content\b/', $setup);
+        self::assertStringContainsString('EXT:playground_site/Resources/Private/PageView/', $setup);
     }
 
     #[Test]
     public function fluidTemplatesExistForEveryLayout(): void
     {
-        foreach (['Default', 'TwoColumn', 'Landing'] as $name) {
+        // PAGEVIEW resolves Pages/<layout identifier>.fluid.html
+        foreach (['PlaygroundDefault', 'PlaygroundTwoColumn', 'PlaygroundLanding'] as $name) {
             self::assertFileExists(
                 __DIR__ . '/../../../packages/playground_site/Resources/Private/PageView/Pages/' . $name . '.fluid.html'
             );
         }
+    }
+
+    #[Test]
+    public function newPagesDefaultToPlaygroundDefaultLayoutAndFallbackTemplateExists(): void
+    {
+        $pageTs = (string)file_get_contents(self::SET . '/page.tsconfig');
+
+        self::assertMatchesRegularExpression('/TCAdefaults\.pages\.(backend_layout|backend_layout_next_level)\s*=\s*pagets__PlaygroundDefault/', $pageTs);
+        self::assertFileExists(
+            __DIR__ . '/../../../packages/playground_site/Resources/Private/PageView/Pages/Default.fluid.html',
+            'PAGEVIEW falls back to "default" when no layout is selected'
+        );
     }
 }

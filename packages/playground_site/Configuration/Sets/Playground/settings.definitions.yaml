@@ -1,0 +1,11 @@
+settings:
+  playground.site.name:
+    label: 'Site name'
+    description: 'Shown in the header of every page'
+    type: string
+    default: 'TYPO3 Playground'
+  playground.site.accentColor:
+    label: 'Accent colour'
+    description: 'CSS colour used for links and the header border'
+    type: color
+    default: '#ff8700'

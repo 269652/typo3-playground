@@ -1,0 +1,8 @@
+# File-based backend layouts. Every file declares
+# mod.web_layout.BackendLayouts.<Identifier>; the identifier is also the
+# name of the PAGEVIEW template (Resources/Private/PageView/Pages/<Identifier>.fluid.html).
+@import 'EXT:playground_site/Configuration/Sets/Playground/BackendLayouts/*.tsconfig'
+
+# New pages start with the one-column layout; subpages inherit it.
+TCAdefaults.pages.backend_layout = pagets__PlaygroundDefault
+TCAdefaults.pages.backend_layout_next_level = pagets__PlaygroundDefault

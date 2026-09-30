@@ -1,0 +1,4 @@
+name: playground/demo
+label: 'Playground Demo Plugin'
+dependencies:
+  - typo3/fluid-styled-content

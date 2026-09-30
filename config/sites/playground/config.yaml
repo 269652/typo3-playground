@@ -1,0 +1,14 @@
+base: 'http://localhost:8080/'
+rootPageId: 1
+websiteTitle: 'TYPO3 Playground'
+dependencies:
+  - playground/site
+languages:
+  -
+    title: English
+    enabled: true
+    languageId: 0
+    base: /
+    locale: en_US.UTF-8
+    navigationTitle: English
+    flag: gb

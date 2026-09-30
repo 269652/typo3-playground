@@ -1,0 +1,5 @@
+name: playground/site
+label: 'Playground Site'
+dependencies:
+  - typo3/fluid-styled-content
+  - playground/demo

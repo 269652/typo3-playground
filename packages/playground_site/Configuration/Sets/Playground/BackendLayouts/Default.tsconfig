@@ -1,0 +1,16 @@
+mod.web_layout.BackendLayouts.PlaygroundDefault {
+    title = Playground: Default (one column)
+    config.backend_layout {
+        colCount = 1
+        rowCount = 1
+        rows {
+            1.columns {
+                1 {
+                    name = Main
+                    colPos = 0
+                    identifier = main
+                }
+            }
+        }
+    }
+}

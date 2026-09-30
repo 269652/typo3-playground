@@ -1,0 +1,21 @@
+# Frontend rendering for the playground site set.
+#
+# PAGEVIEW renders Pages/<backend layout identifier>.fluid.html, i.e. one of
+# PlaygroundDefault, PlaygroundTwoColumn or PlaygroundLanding (see
+# BackendLayouts/*.tsconfig). A single "page-content" processor fetches the
+# content of every column that declares an `identifier` in its backend layout
+# and exposes it as {content.<identifier>} (main, sidebar, hero, footer).
+page = PAGE
+page {
+    10 = PAGEVIEW
+    10 {
+        paths {
+            100 = EXT:playground_site/Resources/Private/PageView/
+        }
+        dataProcessing {
+            10 = page-content
+            10.as = content
+        }
+    }
+    includeCSS.playground = EXT:playground_site/Resources/Public/Css/playground.css
+}

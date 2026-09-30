@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="locallang_db.xlf" date="2026-09-30T00:00:00Z" product-name="playground_demo">
+        <body>
+            <trans-unit id="plugin.greeting.title"><source>Greeting (demo)</source></trans-unit>
+            <trans-unit id="plugin.greeting.description"><source>Greets the visitor according to the time of day.</source></trans-unit>
+            <trans-unit id="flexform.sheet.general"><source>General</source></trans-unit>
+            <trans-unit id="flexform.name"><source>Name to greet</source></trans-unit>
+        </body>
+    </file>
+</xliff>

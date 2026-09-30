@@ -1,0 +1,12 @@
+# Default view paths and settings of the Greeting plugin.
+# `settings.name` can be overridden per plugin instance via the FlexForm.
+plugin.tx_playgrounddemo_greeting {
+    view {
+        templateRootPaths.0 = EXT:playground_demo/Resources/Private/Templates/
+        partialRootPaths.0 = EXT:playground_demo/Resources/Private/Partials/
+        layoutRootPaths.0 = EXT:playground_demo/Resources/Private/Layouts/
+    }
+    settings {
+        name = World
+    }
+}

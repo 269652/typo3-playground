@@ -1,0 +1,6 @@
+.pg-header { padding: 1rem 1.5rem; border-bottom: 4px solid; font-family: system-ui, sans-serif; }
+.pg-main { max-width: 64rem; margin: 0 auto; padding: 1.5rem; font-family: system-ui, sans-serif; }
+.pg-grid--two { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+.pg-hero { padding: 3rem 1.5rem; background: #f4f4f4; }
+.pg-teasers { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem; margin-top: 2rem; }
+@media (max-width: 40rem) { .pg-grid--two { grid-template-columns: 1fr; } }

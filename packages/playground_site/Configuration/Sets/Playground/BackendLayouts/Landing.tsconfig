@@ -1,0 +1,30 @@
+mod.web_layout.BackendLayouts.PlaygroundLanding {
+    title = Playground: Landing (hero + content + footer teasers)
+    config.backend_layout {
+        colCount = 1
+        rowCount = 3
+        rows {
+            1.columns {
+                1 {
+                    name = Hero
+                    colPos = 10
+                    identifier = hero
+                }
+            }
+            2.columns {
+                1 {
+                    name = Content
+                    colPos = 0
+                    identifier = main
+                }
+            }
+            3.columns {
+                1 {
+                    name = Footer teasers
+                    colPos = 20
+                    identifier = footer
+                }
+            }
+        }
+    }
+}
